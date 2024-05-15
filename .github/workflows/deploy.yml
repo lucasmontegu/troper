@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
 jobs:
   deploy_api:
     name: Deploy API
@@ -13,8 +16,7 @@ jobs:
       - run:
           flyctl deploy --config apps/api/fly.toml
           --dockerfile  apps/api/Dockerfile --remote-only --wait-timeout=500
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        
 
   deploy_frontend:
     name: Deploy Frontend
@@ -25,5 +27,3 @@ jobs:
       - run:
           flyctl deploy --config apps/admin/fly.toml
           --dockerfile  apps/admin/Dockerfile --remote-only --wait-timeout=500
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
