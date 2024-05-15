@@ -8,7 +8,7 @@ jobs:
     name: Deploy API
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run:
           flyctl deploy --config apps/api/fly.toml
@@ -20,7 +20,7 @@ jobs:
     name: Deploy Frontend
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run:
           flyctl deploy --config apps/admin/fly.toml
