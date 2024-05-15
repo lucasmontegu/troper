@@ -1,0 +1,15 @@
+Dockerfile
+.dockerignore
+.git
+node_modules
+node_modules.bun
+
+# Remix output
+.cache
+/build/
+/public/build/
+
+npm-debug.log
+/.cache
+.env
+README.md

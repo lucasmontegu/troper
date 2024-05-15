@@ -1,0 +1,11 @@
+{
+  "extends": "@troper/typescript-config/base.json",
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "types": ["bun-types"]
+  },
+  "include": ["src", "*.ts", "**/*.ts"],
+  "exclude": ["node_modules"]
+}

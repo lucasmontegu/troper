@@ -1,0 +1,15 @@
+{
+  "name": "@troper/utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+    "@troper/typescript-config": "workspace:*",
+    "typescript": "5.4.5"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

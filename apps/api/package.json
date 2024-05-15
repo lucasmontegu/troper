@@ -1,0 +1,24 @@
+{
+  "name": "@troper/api",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "bun run --hot src/index.ts",
+    "start": "NODE_ENV=production bun run src/index.ts",
+    "test": "bun test",
+    "lint": "eslint \"**/*.ts*\""
+  },
+  "dependencies": {
+    "@hono/zod-openapi": "^0.11.1",
+    "@hono/zod-validator": "^0.2.1",
+    "@t3-oss/env-core": "^0.10.1",
+    "hono": "^4.3.6",
+    "zod": "^3.23.8",
+    "@troper/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
