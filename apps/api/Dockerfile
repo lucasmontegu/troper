@@ -6,11 +6,7 @@ WORKDIR /app
 COPY . .
 
 # To keep the image small ;)
-RUN rm -rf /app/apps/docs
-RUN rm -rf /app/apps/screenshot-service
-RUN rm -rf /app/apps/web
-RUN rm -rf /app/packages/api
-RUN rm -rf /app/packages/integrations/vercel
+RUN rm -rf /app/apps/admin
 
 #  Temp solution for bun
 RUN bun install --ignore-scripts

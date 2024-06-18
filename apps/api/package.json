@@ -11,12 +11,23 @@
     "lint": "eslint \"**/*.ts*\""
   },
   "dependencies": {
-    "@hono/zod-openapi": "^0.11.1",
-    "@hono/zod-validator": "^0.2.1",
+    "@clerk/backend": "^1.2.3",
+    "@hono/clerk-auth": "^2.0.0",
+    "@hono/swagger-ui": "^0.2.2",
+    "@hono/zod-openapi": "^0.14.4",
+    "@hono/zod-validator": "^0.2.2",
+    "@paddlejs-mediapipe/opencv": "^0.0.4",
+    "@paddlejs-models/ocr": "^1.2.4",
+    "@paddlejs/paddlejs-backend-wasm": "^1.0.3",
+    "@paddlejs/paddlejs-core": "^2.2.0",
     "@t3-oss/env-core": "^0.10.1",
-    "hono": "^4.3.6",
+    "@troper/db": "workspace:*",
+    "@troper/utils": "workspace:*",
+    "dotenv": "^16.4.5",
+    "hono": "^4.4.6",
+    "tesseract-wasm": "^0.10.0",
     "zod": "^3.23.8",
-    "@troper/utils": "workspace:*"
+    "zod-prisma-types": "^3.1.8"
   },
   "devDependencies": {
     "@types/bun": "latest"

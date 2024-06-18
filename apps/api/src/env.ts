@@ -1,31 +1,17 @@
-import { createEnv } from "@t3-oss/env-core";
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
+import "dotenv/config";
 import { z } from "zod";
-
 import { flyRegions } from "@troper/utils";
 
-export const env = createEnv({
-  server: {
-    FLY_REGION: z.enum(flyRegions),
-  },
+console.log("🔐 Loading environment variables...");
 
-  /**
-   * What object holds the environment variables at runtime. This is usually
-   * `process.env` or `import.meta.env`.
-   */
-  runtimeEnv: process.env,
-
-  /**
-   * By default, this library will feed the environment variables directly to
-   * the Zod validator.
-   *
-   * This means that if you have an empty string for a value that is supposed
-   * to be a number (e.g. `PORT=` in a ".env" file), Zod will incorrectly flag
-   * it as a type mismatch violation. Additionally, if you have an empty string
-   * for a value that is supposed to be a string with a default value (e.g.
-   * `DOMAIN=` in an ".env" file), the default value will never be applied.
-   *
-   * In order to solve these issues, we recommend that all new projects
-   * explicitly specify this option as true.
-   */
-  skipValidation: true,
+export const zEnv = z.object({
+  FLY_REGION: z.enum(flyRegions),
+  CLERK_SECRET_KEY: z.string().min(1),
+  CLERK_PUBLISHABLE_KEY: z.string().min(1),
+  DATABASE_URL: z.string().min(1),
+  ENVIROMENT: z.enum(["development", "production"]),
+  SENTRY_DSN: z.string().optional(),
 });
+
+export type Env = z.infer<typeof zEnv>;

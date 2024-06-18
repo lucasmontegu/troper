@@ -1,0 +1,210 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model User {
+  id            String             @id @default(cuid())
+  clerkId       String          @unique @map("clerk_id")
+  email         String          @unique
+  name          String
+  organization  Organization?   @relation(fields: [organizationId], references: [id])
+  organizationId String?        @map("organization_id")
+  role          String
+  plan          String          @default("basic") // Plan de suscripción del usuario
+  credits       Int             @default(3) // Créditos iniciales para el plan básico
+  notificationSettings NotificationSetting[]
+  subscriptions UserSubscription[]
+  scanConfigs   ScanConfiguration[]
+  scannedFiles  ScannedFile[]
+  usageLogs     UsageLog[]
+  customOCRConfigs CustomOCRConfig[]
+  projects      Project[]
+  stripeCustomer StripeCustomer?
+
+  @@map(name: "users")
+}
+
+model Project {
+  id            String                @id @default(cuid())
+  user          User               @relation(fields: [userId], references: [id])
+  userId        String              @map("user_id")
+  name          String
+  description   String?
+  apiKey        String             @unique @map("api_key")
+  channels      Channel[]
+  scanConfigs   ScanConfiguration[]
+  scannedFiles  ScannedFile[]
+
+  createdAt DateTime @default(now())
+
+  @@map(name: "projects")
+}
+
+model Organization {
+  id        String      @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+  members   User[]
+}
+
+model SubscriptionPlan {
+  id            String              @id @default(cuid())
+  name          String
+  description   String?
+  price         Decimal          @db.Decimal(10, 2)
+  tokensIncluded Int              @map("tokens_included")
+  isFree        Boolean          @default(false)
+  subscriptions UserSubscription[]
+
+  @@map(name: "subscription_plans")
+}
+
+model UserSubscription {
+  id             String            @id @default(cuid())
+  user           User           @relation(fields: [userId], references: [id])
+  userId         String         @map("user_id")
+  plan           SubscriptionPlan @relation(fields: [planId], references: [id])
+  planId         String         @map("plan_id")
+  startDate      DateTime       @default(now()) @map("start_date")
+  endDate        DateTime?      @map("end_date")
+  tokensRemaining Int           @map("tokens_remaining")
+  tokenPurchases TokenPurchase[]
+
+  @@map(name: "user_subscriptions")
+}
+
+model TokenPurchase {
+  id             String              @id @default(cuid())
+  userSubscription UserSubscription @relation(fields: [userSubscriptionId], references: [id])
+  userSubscriptionId String       @map("user_subscription_id")
+  tokensPurchased Int             @map("tokens_purchased")
+  purchaseDate   DateTime         @default(now()) @map("purchase_date")
+
+  @@map(name: "token_purchases")
+}
+
+model ScanConfiguration {
+  id          String          @id @default(cuid())
+  user        User         @relation(fields: [userId], references: [id])
+  userId      String      @map("user_id")
+  project     Project      @relation(fields: [projectId], references: [id])
+  projectId   String        @map("project_id")
+  name        String
+  description String?
+  settings    Json
+  scannedFiles ScannedFile[]
+
+  @@map(name: "scan_configurations")
+}
+
+model ScannedFile {
+  id            String              @id @default(cuid())
+  user          User             @relation(fields: [userId], references: [id])
+  userId        String            @map("user_id")
+  project       Project          @relation(fields: [projectId], references: [id])
+  projectId     String            @map("project_id")
+  fileData      String            @map("file_data")
+  scanConfig    ScanConfiguration @relation(fields: [scanConfigId], references: [id])
+  scanConfigId  String            @map("scan_config_id")
+  scannedAt     DateTime         @default(now()) @map("scanned_at")
+  usageLogs     UsageLog[]
+  customOCRConfig CustomOCRConfig[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map(name: "scanned_files")
+}
+
+model CustomOCRConfig {
+  id             String              @id @default(cuid())
+  user           User             @relation(fields: [userId], references: [id])
+  userId         String           @map("user_id")
+  name           String           @unique
+  description    String?
+  settings       Json             // Configuraciones en formato JSON
+  scannedFiles   ScannedFile[]
+
+  @@map(name: "custom_ocr_configs")
+}
+
+model UsageLog {
+  id            String         @id @default(cuid())
+  user          User        @relation(fields: [userId], references: [id])
+  userId        String       @map("user_id")
+  scannedFile   ScannedFile @relation(fields: [scannedFileId], references: [id]) 
+  scannedFileId String     @map("scanned_file_id")  
+  tokensUsed    Int         @default(0) @map("tokens_used")
+  loggedAt      DateTime    @default(now()) @map("logged_at")
+
+  @@map(name: "usage_logs")
+}
+
+model StripeCustomer {
+  id                 String      @id @default(cuid())
+  user               User     @relation(fields: [userId], references: [id])
+  userId             String      @unique @map("user_id")
+  stripeCustomerId   String      @map("stripe_customer_id")
+  stripeSubscriptionId String?   @map("stripe_subscription_id")
+  lastPaymentDate    DateTime?   @map("last_payment_date")
+
+  @@map(name: "stripe_customers")
+}
+
+model Channel {
+  id        String      @id @default(cuid())
+  name      String
+  projectId String    @map("project_id")
+  project   Project  @relation(fields: [projectId], references: [id])
+  events    Event[]
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([projectId, name])
+  @@map(name: "channels")
+}
+
+model Event {
+  id        String      @id @default(cuid())
+  type      String   @db.VarChar(100)
+  name      String
+  channelId String    @map("channel_id")
+  channel   Channel  @relation(fields: [channelId], references: [id])
+  userId    String?  @map("user_id")
+  icon      String?
+  tags  Json?
+  notify    Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map(name: "events")
+}
+
+model NotificationSetting {
+  id        String      @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String    @map("user_id")
+  type      NotificationType  @default(DISCORD)
+  enabled    Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+  details   Json?
+  @@map(name: "notification_settings")
+}
+
+enum NotificationType {
+  DISCORD
+  SLACK
+  MOBILE
+}
+
+// if we need full reset : npx prisma db push --force-reset

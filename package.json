@@ -9,6 +9,7 @@
     "dx": "turbo run dx",
     "lint:strict": "eslint --max-warnings=0 apps/**/*.{ts,tsx}",
     "format:check": "prettier -c \"**/*.{ts,tsx,md}\"",
+    "ui:add": "pnpm --filter @troper/ui ui:add",
     "tsc": "tsc",
     "test": "turbo run test"
   },
@@ -16,17 +17,18 @@
     "@ianvs/prettier-plugin-sort-imports": "4.2.1",
     "@troper/eslint-config": "workspace:*",
     "@troper/typescript-config": "workspace:*",
+    "@troper/ui": "workspace:*",
     "@troper/utils": "workspace:*",
-    "@types/validator": "^13.11.10",
-    "bun-types": "^1.1.8",
+    "@types/validator": "^13.12.0",
+    "bun-types": "^1.1.13",
     "dotenv": "^16.4.5",
-    "eslint": "^9.2.0",
-    "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "0.5.14",
+    "eslint": "^9.5.0",
+    "prettier": "^3.3.2",
+    "prettier-plugin-tailwindcss": "0.6.5",
     "turbo": "latest",
     "typescript": "5.4.5"
   },
-  "packageManager": "pnpm@8.9.0",
+  "packageManager": "pnpm@9.4.0",
   "engines": {
     "node": ">=20"
   },

@@ -1,19 +1,16 @@
-# fly.toml app configuration file generated for openstatus-api on 2023-09-13T17:29:05+02:00
+# fly.toml app configuration file generated for troper-api on 2024-05-15T14:05:54-03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "troper-api"
-primary_region = "sea"
-
+app = 'troper-api'
+primary_region = 'sea'
 
 [build]
-  dockerfile = "./Dockerfile"
+  dockerfile = './Dockerfile'
 
-[[vm]]
-  cpu_kind = "shared"
-  cpus = 1
-  memory_mb = 256
+[deploy]
+  strategy = 'canary'
 
 [http_service]
   internal_port = 3000
@@ -21,19 +18,21 @@ primary_region = "sea"
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 1
+  processes = ['app']
 
-  processes = ["app"]
-[http_service.concurrency]
-    type = "requests"
+  [http_service.concurrency]
+    type = 'requests'
     hard_limit = 1000
     soft_limit = 500
 
-[deploy]
-  strategy = "canary"
+  [[http_service.checks]]
+    interval = '15s'
+    timeout = '5s'
+    grace_period = '10s'
+    method = 'GET'
+    path = '/ping'
 
-[[http_service.checks]]
-  grace_period = "10s"
-  interval = "15s"
-  method = "GET"
-  timeout = "5s"
-  path = "/ping"
+[[vm]]
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 512

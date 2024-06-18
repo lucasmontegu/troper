@@ -1,3 +1,6 @@
+import clsx, { ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
 export const flyRegionsDict = {
   eze: {
     code: "eze",
@@ -42,3 +45,7 @@ export const flyRegions = ["eze", "bog", "sea", "lax", "mad", "sjc"] as const;
 export const availableRegions = [...flyRegions] as const;
 
 export const regionsDict = { ...flyRegionsDict } as const;
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}

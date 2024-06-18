@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.ts",
   "scripts": {},
-  "dependencies": {},
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.3.0"
+  },
   "devDependencies": {
     "@troper/typescript-config": "workspace:*",
     "typescript": "5.4.5"

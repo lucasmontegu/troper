@@ -1,0 +1,23 @@
+{
+  "extends": "@troper/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+  },
+  "include": [
+    "next-env.d.ts",
+    "next.config.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "**/*.mjs",
+  ],
+  "exclude": ["node_modules", "env.ts"]
+}
