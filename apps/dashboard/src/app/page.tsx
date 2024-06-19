@@ -1,10 +1,10 @@
 import Image from "next/image";
 /* import { Card } from "@troper/ui/card";
 import { Code } from "@troper/ui/code"; */
-import styles from "./page.module.css";
+/* import styles from "./page.module.css"; */
 /* import { Button } from "@troper/ui/button"; */
 
-function Gradient({
+/* function Gradient({
   conic,
   className,
   small,
@@ -25,7 +25,7 @@ function Gradient({
         .join(" ")}
     />
   );
-}
+} */
 
 const LINKS = [
   {
@@ -53,8 +53,8 @@ const LINKS = [
 
 export default function Page(): JSX.Element {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
+    <main>
+      <div >
         <p>
           examples/basic&nbsp;
           {/* <Code className={styles.code}>web</Code> */}
@@ -66,14 +66,13 @@ export default function Page(): JSX.Element {
             target="_blank"
           >
             By{" "}
-            <Image
+            {/* <Image
               alt="Vercel Logo"
-              className={styles.vercelLogo}
               height={24}
               priority
               src="/vercel.svg"
               width={100}
-            />
+            /> */}
           </a>
         </div>
       </div>
@@ -82,10 +81,10 @@ export default function Page(): JSX.Element {
         Click me!
       </Button> */}
 
-      <div className={styles.hero}>
-        <div className={styles.heroContent}>
-          <div className={styles.logos}>
-            <div className={styles.circles}>
+      <div >
+        <div >
+          <div >
+            <div >
               <Image
                 alt=""
                 height={614}
@@ -94,11 +93,11 @@ export default function Page(): JSX.Element {
                 style={{ pointerEvents: "none" }}
               />
             </div>
-            <div className={styles.logoGradientContainer}>
-              <Gradient className={styles.logoGradient} conic small />
+            <div >
+              {/* <Gradient className={styles.logoGradient} conic small /> */}
             </div>
 
-            <div className={styles.logo}>
+            <div >
               <Image
                 alt="Turborepo"
                 height={120}
@@ -109,10 +108,10 @@ export default function Page(): JSX.Element {
               />
             </div>
           </div>
-          <Gradient className={styles.backgroundGradient} conic />
-          <div className={styles.turborepoWordmarkContainer}>
+          {/* <Gradient className={styles.backgroundGradient} conic /> */}
+          <div >
             <svg
-              className={styles.turborepoWordmark}
+              
               viewBox="0 0 506 50"
               width={200}
               xmlns="http://www.w3.org/2000/svg"

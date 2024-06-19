@@ -1,23 +1,47 @@
 {
-  "extends": "@troper/typescript-config/nextjs.json",
+  "extends": "@troper/typescript-config/base.json",
   "compilerOptions": {
+    "lib": [
+      "es2022",
+      "dom",
+      "dom.iterable"
+    ],
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
+    "module": "esnext",
+    "noImplicitAny": false, // TODO: Resolve errors when setting this to 'true'
+    "useUnknownInCatchVariables": false // TODO: Resolve errors when setting this to 'true'
+    ,
+    "allowJs": true,
+    "noEmit": true
   },
   "include": [
     "next-env.d.ts",
-    "next.config.ts",
+    "next.config.js",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
     "**/*.mjs",
+    "next.config.js",
+    "postcss.config.js",
+    "postcss.config.js",
+    "tailwind.config.js",
+    "../../packages/ui/src/components/ModeToggle.tsx",
+    "../../packages/ui/src/components/theme-provider.tsx"
   ],
-  "exclude": ["node_modules", "env.ts"]
+  "exclude": [
+    "node_modules",
+    "env.mjs"
+  ]
 }

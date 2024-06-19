@@ -16,14 +16,14 @@ datasource db {
 }
 
 model User {
-  id            String             @id @default(cuid())
+  id            String          @id @default(cuid())
   clerkId       String          @unique @map("clerk_id")
   email         String          @unique
   name          String
   organization  Organization?   @relation(fields: [organizationId], references: [id])
   organizationId String?        @map("organization_id")
-  role          String
-  plan          String          @default("basic") // Plan de suscripción del usuario
+  role          UserRole        @default(USER)
+  plan          PlanType        @default(HOBBY) // Plan de suscripción del usuario
   credits       Int             @default(3) // Créditos iniciales para el plan básico
   notificationSettings NotificationSetting[]
   subscriptions UserSubscription[]
@@ -73,7 +73,7 @@ model SubscriptionPlan {
 }
 
 model UserSubscription {
-  id             String            @id @default(cuid())
+  id             String         @id @default(cuid())
   user           User           @relation(fields: [userId], references: [id])
   userId         String         @map("user_id")
   plan           SubscriptionPlan @relation(fields: [planId], references: [id])
@@ -205,6 +205,17 @@ enum NotificationType {
   DISCORD
   SLACK
   MOBILE
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+enum PlanType {
+  HOBBY
+  PRO
+  ENTERPRISE
 }
 
 // if we need full reset : npx prisma db push --force-reset

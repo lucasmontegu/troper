@@ -1,10 +1,10 @@
 "use client"
 import React from 'react'
-import { Separator } from '@troper/ui/components/ui/separator'
+import { Separator } from '@troper/ui/components/separator'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Icons } from '@troper/ui/components/icons'
+import { Icons } from '@/components/icons'
 
 
 export default function DashboardSideBar() {
@@ -15,7 +15,7 @@ export default function DashboardSideBar() {
       <div className="flex h-full max-h-screen flex-col gap-2 ">
         <div className="flex h-[55px] items-center justify-between border-b px-3 w-full">
           <Link className="flex items-center gap-2 font-semibold ml-1" href="/">
-            <span className="">Nextjs Starter Kit</span>
+            <span className="">Troper</span>
           </Link>
         </div>
         <div className="flex-1 overflow-auto py-2 ">
@@ -26,9 +26,7 @@ export default function DashboardSideBar() {
               })}
               href="/dashboard"
             >
-              <div className="border rounded-lg dark:bg-black dark:border-gray-800 border-gray-400 p-1 bg-white">
-                <Icons.home className="h-3 w-3" />
-              </div>
+                <Icons.home className="h-6 w-6" />
               Home
             </Link>
             <Link
@@ -37,9 +35,7 @@ export default function DashboardSideBar() {
               })}
               href="/dashboard/projects"
             >
-              <div className="border rounded-lg dark:bg-black dark:border-gray-800 border-gray-400 p-1 bg-white">
-                <Icons.folder className="h-3 w-3" />
-              </div>
+                <Icons.folder className="h-6 w-6" />
               Projects
             </Link>
             <Link
@@ -48,9 +44,7 @@ export default function DashboardSideBar() {
               })}
               href="/dashboard/kanban"
             >
-              <div className="border rounded-lg dark:bg-black dark:border-gray-800 border-gray-400 p-1 bg-white">
-                <Icons.faTasks className="h-3 w-3" />
-              </div>
+                <Icons.faTasks className="h-6 w-6" />
               Kanban
             </Link>
             <Link
@@ -59,9 +53,7 @@ export default function DashboardSideBar() {
               })}
               href="/dashboard/finance"
             >
-              <div className="border rounded-lg dark:bg-black dark:border-gray-800 border-gray-400 p-1 bg-white">
-                <Icons.banknote className="h-3 w-3" />
-              </div>
+                <Icons.banknote className="h-6 w-6" /> 
               Finance
             </Link>
             <Separator className="my-3" />
@@ -72,9 +64,7 @@ export default function DashboardSideBar() {
               href="/dashboard/settings"
               id="onboarding"
             >
-              <div className="border rounded-lg dark:bg-black dark:border-gray-800 border-gray-400 p-1 bg-white">
-                <Icons.settings className="h-3 w-3" />
-              </div>
+                <Icons.settings className="h-6 w-6" />
               Settings
             </Link>
           </nav>

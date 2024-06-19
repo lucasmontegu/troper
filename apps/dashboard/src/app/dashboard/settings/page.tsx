@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
-import { Input } from '@troper/ui/components/ui/input'
-import { Label } from '@troper/ui/components/ui/label'
+import { Input } from '@troper/ui/components/input'
+import { Label } from '@troper/ui/components/label'
 import { useUser } from '@clerk/nextjs'
 
 export default function Settings() {

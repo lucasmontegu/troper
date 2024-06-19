@@ -7,16 +7,16 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
     navigationMenuTriggerStyle
-} from "@troper/ui/components/ui/navigation-menu"
+} from "@troper/ui/components/navigation-menu"
 import { cn } from "@troper/utils"
 import { useAuth } from "@clerk/nextjs"
-import { Dialog, DialogClose } from "@troper/ui/components/ui/dialog"
+import { Dialog, DialogClose } from "@troper/ui/components/dialog"
 import { BlocksIcon } from "lucide-react"
 import Link from 'next/link'
 import * as React from "react"
 import { Profile } from "./Profile"
-import { Button } from "@troper/ui/components/ui/button"
-import { SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@troper/ui/components/ui/sheet"
+import { Button } from "@troper/ui/components/button"
+import { SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@troper/ui/components/sheet"
 import { ModeToggle } from '@/components/ModeToggle'
 import { Icons } from "@troper/ui/components/icons"
 
@@ -45,7 +45,7 @@ export function NavBar() {
     const { userId } = useAuth();
 
     return (
-        <div className="flex min-w-full fixed justify-between p-2 border-b z-10 dark:bg-black dark:bg-opacity-50 bg-white">
+        <div className="flex min-w-full fixed justify-between p-2 border-b z-10">
             <div className="flex justify-between w-full min-[825px]:hidden">
                 <Dialog>
                     <SheetTrigger className="p-2 transition">

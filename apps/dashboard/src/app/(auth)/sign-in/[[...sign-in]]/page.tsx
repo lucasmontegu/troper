@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react";
-import PageWrapper from "@/components/Container/PageWrapper";
+import PageWrapper from "@/components/Container/page-wrapper";
 import { SignIn } from "@clerk/nextjs";
 
 export default function SignInPage() {

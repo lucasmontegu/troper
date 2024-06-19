@@ -1,14 +1,15 @@
+import "../styles/globals.css";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-/* import { Analytics } from "@vercel/analytics/react"; */
+import { Analytics } from "@vercel/analytics/react";
 
-import Provider from "./provider";
+import Provider from "@/components/provider";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@troper/ui/components/ui/sonner";
-
-import "./globals.css";
+import { Toaster } from "@troper/ui/components/sonner";
+import { cn } from "@/lib/utils"
 
 import { Inter } from "next/font/google";
+import ModalProvider from "@/components/modal-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,7 +44,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body className={inter.className}>
+        <body
+        className={inter.className}
+        >
           <Provider>
             <ThemeProvider
               attribute="class"
@@ -51,11 +54,13 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
-              {children}
-              <Toaster />
+              <ModalProvider>
+                {children}
+                <Toaster />
+              </ModalProvider>
             </ThemeProvider>
           </Provider>
-          {/* <Analytics /> */}
+          <Analytics />
         </body>
       </html>
     </ClerkProvider>

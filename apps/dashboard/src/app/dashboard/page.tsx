@@ -1,8 +1,8 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@troper/ui/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@troper/ui/components/card'
 /* import { BarChartComponent } from './(components)/BarChart' */
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
-import { Button } from '@troper/ui/components/ui/button'
+import { Button } from '@troper/ui/components/button'
 
 export default async function Dashboard() {
 

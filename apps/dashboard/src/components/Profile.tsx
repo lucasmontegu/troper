@@ -2,7 +2,7 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@troper/ui/components/ui/avatar"
+} from "@troper/ui/components/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,10 +12,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger
-} from "@troper/ui/components/ui/dropdown-menu"
+} from "@troper/ui/components/dropdown-menu"
 import { SignOutButton, useUser } from "@clerk/nextjs"
 import Link from "next/link"
-import { Icons } from "@troper/ui/components/icons"
+import { Icons } from "@/components/icons"
 
 export function Profile() {
   const { isSignedIn, user, isLoaded } = useUser();
@@ -32,7 +32,7 @@ export function Profile() {
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                  <Link href="/user-profile">
+                  <Link href="/dashboard/user-profile">
                       <DropdownMenuItem>
                           <Icons.user className="mr-2 h-4 w-4" />
                           <span>Profile</span>

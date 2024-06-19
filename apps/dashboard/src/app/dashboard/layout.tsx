@@ -1,9 +1,7 @@
 import { ReactNode } from "react"
-/* import DashboardSideBar from "./(components)/DashboardSideBar"
-import DashboardTopNav from "./(components)/DashboardTopNav" */
 import React from "react"
-import DashboardSideBar from "../../components/DashboardSideBar"
-import DashboardTopNav from "../../components/DashboardTopNav"
+import DashboardSideBar from "@/components/DashboardSideBar"
+import DashboardTopNav from "@/components/DashboardTopNav"
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
 
